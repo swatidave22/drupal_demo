@@ -1,0 +1,22 @@
+<?php
+
+/**
+ * Implements hook_ctools_plugin_directory().
+ */
+namespace Drupal\restful_custom\Plugin\resource;
+use Drupal\restful\Plugin\resource\ResourceEntity;
+use Drupal\restful\Plugin\resource\ResourceInterface;
+
+function api_demo_form_alter($form, $form_state) {
+  $handler = restful()
+  ->getResourceManager()
+  ->getPlugin('articles:1.0');
+
+// Define the sorting by ID (descending) and label (ascending).
+$query['sort'] = '-id,label';
+$result = restful()
+  ->getFormatterManager()
+  ->format($handler->doGet('', $query));
+
+var_dump($result);die;
+}
